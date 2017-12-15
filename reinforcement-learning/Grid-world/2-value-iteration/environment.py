@@ -29,9 +29,6 @@ class GraphicDisplay(tk.Tk):
         (self.up, self.down, self.left,
          self.right), self.shapes = self.load_images()
         self.canvas = self._build_canvas()
-        #self.text_reward(2, 2, "R : 1.0")
-        #self.text_reward(1, 2, "R : -1.0")
-        #self.text_reward(2, 1, "R : -1.0")
 
     def _build_canvas(self):
         canvas = tk.Canvas(self, bg='white',
@@ -71,9 +68,7 @@ class GraphicDisplay(tk.Tk):
 
         # add img to canvas
         self.rectangle = canvas.create_image(50, 150, image=self.shapes[0])
-        #canvas.create_image(250, 150, image=self.shapes[1])
-        #canvas.create_image(150, 250, image=self.shapes[1])
-        #canvas.create_image(250, 250, image=self.shapes[2])
+
 
         # pack all
         canvas.pack()
@@ -107,7 +102,7 @@ class GraphicDisplay(tk.Tk):
             self.agent.value_table = [[0.0] * WIDTH for _ in range(HEIGHT)]
 
             x, y = self.canvas.coords(self.rectangle)
-            self.canvas.move(self.rectangle, 50 , 150 )
+            self.canvas.move(self.rectangle, UNIT / 2 - x, UNIT / 2 - y + UNIT)
 
     def reset(self):
         self.update()

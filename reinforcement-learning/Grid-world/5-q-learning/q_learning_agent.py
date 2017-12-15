@@ -8,7 +8,7 @@ class QLearningAgent:
         # actions = [0, 1, 2, 3]
         self.actions = actions
         self.learning_rate = 0.01
-        self.discount_factor = 0.9
+        self.discount_factor = 0.99
         self.epsilon = 0.05
         self.q_table = defaultdict(lambda: [0.0, 0.0, 0.0, 0.0])
 

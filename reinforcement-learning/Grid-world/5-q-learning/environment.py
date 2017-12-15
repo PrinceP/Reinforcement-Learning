@@ -34,10 +34,10 @@ class Env(tk.Tk):
             canvas.create_line(x0, y0, x1, y1)
 
         # add img to canvas
-        self.rectangle = canvas.create_image(50, 50, image=self.shapes[0])
-        self.triangle1 = canvas.create_image(250, 150, image=self.shapes[1])
+        self.rectangle = canvas.create_image(50, 150, image=self.shapes[0])
+        #self.triangle1 = canvas.create_image(250, 150, image=self.shapes[1])
         self.triangle2 = canvas.create_image(150, 250, image=self.shapes[1])
-        self.circle = canvas.create_image(250, 250, image=self.shapes[2])
+        self.circle = canvas.create_image(350, 350, image=self.shapes[2])
 
         # pack all
         canvas.pack()
@@ -98,7 +98,7 @@ class Env(tk.Tk):
         self.update()
         time.sleep(0.5)
         x, y = self.canvas.coords(self.rectangle)
-        self.canvas.move(self.rectangle, UNIT / 2 - x, UNIT / 2 - y)
+        self.canvas.move(self.rectangle, UNIT / 2 - x, UNIT / 2 - y + UNIT)
         self.render()
         # return observation
         return self.coords_to_state(self.canvas.coords(self.rectangle))
@@ -132,12 +132,11 @@ class Env(tk.Tk):
         if next_state == self.canvas.coords(self.circle):
             reward = 100
             done = True
-        elif next_state in [self.canvas.coords(self.triangle1),
-                            self.canvas.coords(self.triangle2)]:
-            reward = -100
+        elif next_state in [self.canvas.coords(self.triangle2)]:
+            reward = -70
             done = True
         else:
-            reward = 0
+            reward = -1
             done = False
 
         next_state = self.coords_to_state(next_state)
